@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { User, Users, GraduationCap, Building2 } from "lucide-react";
+import { User, Users, GraduationCap, Building2, ChevronDown } from "lucide-react";
 
 export type UserMode = "STUDENT" | "FACULTY" | "HOD" | null;
 
@@ -84,16 +84,19 @@ export default function RoleSelector({ students, faculties, departments, onSelec
           <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="space-y-2">
               <label className="block text-sm font-semibold opacity-90">{getLabel()}</label>
-              <select 
-                value={selectedId} 
-                onChange={e => setSelectedId(e.target.value)}
-                required
-                className={`w-full  rounded-xl p-3.5 text-sm font-medium transition-all outline-none border-2 focus:border-emerald-500
-                  ${isDarkMode ? 'bg-stone-950/50 border-stone-700 text-stone-200' : 'bg-white border-stone-200 text-stone-800 shadow-sm'}`}
-              >
-                <option value="" disabled>Select from list...</option>
-                {getOptions().map(o => <option key={o} value={o}>{o}</option>)}
-              </select>
+              <div className="relative">
+                <select 
+                  value={selectedId} 
+                  onChange={e => setSelectedId(e.target.value)}
+                  required
+                  className={`w-full appearance-none rounded-xl p-3.5 pr-10 text-sm font-medium transition-all outline-none border-2 focus:border-emerald-500
+                    ${isDarkMode ? 'bg-stone-950/50 border-stone-700 text-stone-200' : 'bg-white border-stone-200 text-stone-800 shadow-sm'}`}
+                >
+                  <option value="" disabled>Select from list...</option>
+                  {getOptions().map(o => <option key={o} value={o}>{o}</option>)}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 opacity-50 pointer-events-none" size={20} />
+              </div>
             </div>
 
             <button type="submit" disabled={!selectedId} className="w-full py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 text-white shadow-md border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98]">
