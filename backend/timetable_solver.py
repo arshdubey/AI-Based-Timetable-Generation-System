@@ -178,4 +178,4 @@ def solve_timetable(
                             students=course_students.get(c, [])
                         ))
                         
-    return result_schedule, status_str
+    return status_str, result_schedule
