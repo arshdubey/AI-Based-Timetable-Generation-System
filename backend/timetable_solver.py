@@ -122,7 +122,7 @@ def solve_timetable(
         # At least 1 day off per week (so max 4 working days if num_days=5)
         # If they teach less than 4 courses, they will naturally have more days off.
         # But we enforce at least 1 day off.
-        # model.Add(sum(f_working_days) <= num_days - 1)
+        # # model.Add(sum(f_working_days) <= num_days - 1)
                 
     # Soft constraints: Gap minimization for faculty (keep existing logic but updated variable names to avoid conflict)
     penalty_vars = []
