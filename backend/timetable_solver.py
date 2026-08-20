@@ -155,7 +155,7 @@ def solve_timetable(
                 penalty_vars.append(span)
 
     if penalty_vars:
-        model.Minimize(sum(penalty_vars))
+        # model.Minimize(sum(penalty_vars))  # Disabled to speed up feasibility search for Render
         
     # Solve
     solver = cp_model.CpSolver()

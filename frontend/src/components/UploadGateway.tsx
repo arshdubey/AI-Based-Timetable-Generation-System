@@ -43,7 +43,7 @@ export default function UploadGateway({ onSuccess, isDarkMode }: UploadGatewayPr
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || "Failed to generate timetable");
       
-      if (data.status === "INFEASIBLE") {
+      if (data.status === "INFEASIBLE" || data.status === "UNKNOWN" || !data.schedule || data.schedule.length === 0) {
         throw new Error("The constraints could not be satisfied. Please check your data.");
       }
       
