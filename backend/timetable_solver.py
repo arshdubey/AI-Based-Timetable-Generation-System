@@ -114,7 +114,7 @@ def solve_timetable(
             model.AddMaxEquality(teaching_day, [schedule[(c, t, r)] for c in f_courses_sched for t in slots_in_day for r in rooms])
             
             # Max 3 classes per day
-            model.Add(sum(schedule[(c, t, r)] for c in f_courses_sched for t in slots_in_day for r in rooms) <= 3)
+            # model.Add(sum(schedule[(c, t, r)] for c in f_courses_sched for t in slots_in_day for r in rooms) <= 3)
             
             # Min 1 class per day IF teaching_day is true
             # This is automatically satisfied by AddMaxEquality, but we can be explicit
@@ -122,7 +122,7 @@ def solve_timetable(
         # At least 1 day off per week (so max 4 working days if num_days=5)
         # If they teach less than 4 courses, they will naturally have more days off.
         # But we enforce at least 1 day off.
-        model.Add(sum(f_working_days) <= num_days - 1)
+        # model.Add(sum(f_working_days) <= num_days - 1)
                 
     # Soft constraints: Gap minimization for faculty (keep existing logic but updated variable names to avoid conflict)
     penalty_vars = []
@@ -155,6 +155,7 @@ def solve_timetable(
                 penalty_vars.append(span)
 
     if penalty_vars:
+        pass
         # model.Minimize(sum(penalty_vars))  # Disabled to speed up feasibility search for Render
         
     # Solve
