@@ -88,7 +88,7 @@ export default function RoleSelector({ students, faculties, departments, onSelec
                 value={selectedId} 
                 onChange={e => setSelectedId(e.target.value)}
                 required
-                className={`w-full appearance-none rounded-xl p-3.5 text-sm font-medium transition-all outline-none border-2 focus:border-emerald-500
+                className={`w-full  rounded-xl p-3.5 text-sm font-medium transition-all outline-none border-2 focus:border-emerald-500
                   ${isDarkMode ? 'bg-stone-950/50 border-stone-700 text-stone-200' : 'bg-white border-stone-200 text-stone-800 shadow-sm'}`}
               >
                 <option value="" disabled>Select from list...</option>
