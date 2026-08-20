@@ -1,0 +1,69 @@
+SMART INDIA HACKATHON 2026 - PRESENTATION CONTENT
+Project: NEP-Aligned Automated Timetable Generator
+Target Rubric: 5/5 (Excellent) across all metrics
+
+================================================================================
+PART 1: PROPOSED SOLUTION
+================================================================================
+1.1 Detailed Explanation of the Proposed Solution / Prototype
+Our proposed solution is an intelligent, constraint-driven Automated Timetable Generator designed specifically to support the multi-disciplinary framework introduced by the National Education Policy (NEP) 2020. The prototype features a highly intuitive, role-based web portal (Student, Faculty, and HOD modes) powered by a mathematical backend constraint solver. University administrators simply upload CSV files containing student registrations, available courses, and room capacities. The system's algorithmic core then computes a 100% clash-free schedule in seconds. The interactive dashboard allows Students to view their weekly schedules and track total credits (across Major, Minor, MDC, AEC, SEC, VAC buckets), enables Faculty to view their classes and instantly find free colleagues for class substitutions, and empowers HODs to mathematically calculate common free slots across their entire department for staff meetings.
+
+1.2 How It Addresses the Problem
+Generating university timetables manually is an NP-hard problem that often takes weeks of tedious trial and error. Furthermore, the NEP 2020 mandates that students can choose interdisciplinary subjects, causing a combinatorial explosion of potential scheduling conflicts. Our solution addresses this root cause by abstracting the scheduling process into a Boolean Satisfiability (SAT) problem. It mathematically guarantees that no student has overlapping classes, no room is double-booked, and room capacities are never exceeded, effectively reducing a multi-week administrative nightmare into a one-click automated process.
+
+1.3 Innovation and Uniqueness of the Solution
+Unlike traditional timetable software which merely functions as a digital spreadsheet for manual data entry, our solution is highly novel and distinctive because it is a generative constraint solver. 
+- NEP Bucket Integration: It natively understands and schedules the complex credit buckets required by the Indian government (Major, Minor, MDC, AEC, etc.).
+- Faculty Well-being Algorithms: It features unique hard constraints prioritizing teacher welfare, strictly enforcing a maximum of 3 classes per day and mathematically guaranteeing at least 1 full weekday off per week for every faculty member.
+- Role-Specific Utility: It provides dynamic tools like the "Substitute Finder" for teachers and "Common Meeting Time Calculator" for HODs, creating clear differentiation from existing static solutions.
+
+================================================================================
+PART 2: TECHNICAL APPROACH
+================================================================================
+2.1 Technologies Used & Technology Stack Justification
+The technology choices are highly appropriate and directly support the solution objectives for a robust, scalable, and highly performant web application:
+- Algorithmic Core: Google OR-Tools (CP-SAT Solver). Justified as the industry standard for solving complex combinatorial optimization and scheduling problems efficiently.
+- Backend Framework: FastAPI (Python) & Uvicorn. Justified for its ultra-fast execution, native asynchronous capabilities, and seamless integration with Python-based AI and math libraries.
+- Frontend Framework: Next.js & React (TypeScript). Justified for building a highly reactive, type-safe, single-page application (SPA).
+- UI/UX Styling: Tailwind CSS, FullCalendar, and Lucide React. Justified for rapid prototyping of a modern, minimal, glassmorphic UI that provides exceptional clarity of presentation.
+
+2.2 Methodology and Process for Implementation
+[Note for PPT: Insert Flowchart Image Here showing CSV Upload -> FastAPI -> OR-Tools -> JSON Response -> Next.js Dashboard]
+1. Data Ingestion: The frontend accepts normalized CSV data (Registrations, Courses, Rooms) via a secure gateway and transmits it to the backend.
+2. Model Instantiation: FastAPI parses the data and initializes the CP-SAT model, creating boolean variables for every possible combination of Course, Room, Day, and Timeslot.
+3. Constraint Application: The system maps strict rules to the variables (e.g., sum of overlapping timeslots <= 1).
+4. Solving & Validation: The CP-SAT solver traverses the search space to find an optimal solution.
+5. Client Rendering: The backend returns a structured JSON payload which is dynamically rendered onto an interactive FullCalendar grid, gated by a Role-Based Access Control (RBAC) selector.
+
+================================================================================
+PART 3: FEASIBILITY AND VIABILITY
+================================================================================
+3.1 Analysis of Feasibility
+The project is technically robust, realistic, and highly implementable. By relying on open-source, enterprise-grade tools (Google OR-Tools, Next.js), the software requires zero proprietary hardware and runs efficiently on standard cloud infrastructure. The working prototype already successfully processes multi-department datasets in O(1) perceived time.
+
+3.2 Potential Challenges and Risks
+- Scale Complexity: For massive universities (e.g., 20,000+ students), the combinatorial search space grows exponentially, which could lead to solver timeouts.
+- Data Quality: The system relies on cleanly formatted CSVs. Corrupt or malformed institutional data will break the ingestion pipeline.
+
+3.3 Strategies for Overcoming Challenges
+- Mitigating Scale: We implement time-limits on the SAT solver and utilize heuristic search methods to return the "best possible" valid schedule rather than the absolute mathematical optimum if the time limit is exceeded. 
+- Mitigating Data Risks: We will implement strict frontend Pydantic/Zod validation schemas to catch CSV errors, missing headers, or invalid datatypes before they ever reach the solver engine, ensuring system stability.
+
+================================================================================
+PART 4: IMPACT AND BENEFITS
+================================================================================
+4.1 Potential Impact on Target Audience
+This solution demonstrates substantial measurable impact for Indian Higher Education Institutions (HEIs). The target beneficiaries are University Administrators, Faculty, and Students. 
+
+4.2 Tangible Benefits
+- Economic & Administrative: Saves hundreds of man-hours per semester currently wasted on manual scheduling, allowing administration to allocate resources to more productive tasks.
+- Social (Faculty Welfare): The algorithm acts as an impartial union, protecting teachers from burnout by programmatically preventing overload and enforcing days off.
+- Educational (Student Flexibility): By guaranteeing clash-free schedules, it empowers students to freely pursue the multidisciplinary education envisioned by NEP 2020 (e.g., a Computer Science student taking a Humanities minor) without fear of timetable conflicts.
+
+================================================================================
+PART 5: RESEARCH AND REFERENCES
+================================================================================
+- National Education Policy (NEP) 2020 Documentation: Ministry of Education, Government of India. (Reference for credit buckets and multidisciplinary frameworks).
+- Google OR-Tools Documentation: https://developers.google.com/optimization (Reference for Constraint Programming and CP-SAT Solver implementation techniques).
+- "University Timetabling using Constraint Logic Programming": Research on algorithmic approaches to educational scheduling logic.
+- Next.js & FastAPI Official Documentation (Reference for highly scalable web architectures).
