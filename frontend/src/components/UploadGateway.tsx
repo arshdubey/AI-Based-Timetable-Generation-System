@@ -35,7 +35,7 @@ export default function UploadGateway({ onSuccess, isDarkMode }: UploadGatewayPr
       formData.append("courses", coursesFile);
       formData.append("rooms", roomsFile);
 
-      const res = await fetch("http://127.0.0.1:8000/generate-timetable", {
+      const res = await fetch("https://ai-based-timetable-generation-system.onrender.com/generate-timetable", {
         method: "POST",
         body: formData,
       });
